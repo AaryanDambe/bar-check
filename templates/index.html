@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11110f">
+  <meta name="description" content="BAR CHECK: three quick rhythm-and-word mini-games. A game, not real security.">
+  <title>BAR CHECK — Prove Your Flow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='game.js') }}" defer></script>
+</head>
+<body>
+  <div class="page-grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="wordmark" href="/" aria-label="Bar Check home"><span class="mark-icon">B</span><span>BAR<span class="lime-text">CHECK</span></span></a>
+    <span class="top-note">THE BOOTH IS OPEN <span class="live-dot"></span></span>
+  </header>
+
+  <main class="layout">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="eyebrow-line"></span> HUMAN? SHOW US YOUR FLOW</p>
+      <h1 id="page-title">BAR<br><span class="title-outline">CHECK</span><span class="title-period">.</span></h1>
+      <p class="intro-copy">Three quick rounds. One mic. <span>Don’t let the bot steal your spot.</span></p>
+      <div class="stamp" aria-hidden="true"><span>NO</span><span>BOTS</span><span>ALLOWED</span></div>
+      <div class="caution"><span class="caution-icon">!</span><span>This is a game, <strong>not real security.</strong></span></div>
+    </section>
+
+    <section class="game-shell" aria-label="Bar Check mini-games">
+      <div class="game-topline">
+        <span class="section-label"><span class="spark">✳</span> LIVE VERIFICATION</span>
+        <span class="round-counter" id="round-counter">ROUND <b>— / 3</b></span>
+      </div>
+      <div class="progress-track" aria-label="Game progress"><span id="progress-fill"></span></div>
+
+      <div class="game-content" id="game-content" aria-live="polite">
+        <div class="welcome-mark" aria-hidden="true"><span>✳</span></div>
+        <p class="game-kicker">STEP UP TO THE MIC</p>
+        <h2>Can you pass<br>the <span>BAR CHECK?</span></h2>
+        <p class="welcome-copy">Catch a rhyme, replay a beat, and spot the odd bar. You’ve got 20 seconds per round.</p>
+        <button class="action-button" id="start-button" type="button">START THE CHECK <span aria-hidden="true">↗</span></button>
+        <p class="micro-copy">3 ROUNDS <i>·</i> 20 SECONDS EACH <i>·</i> ZERO PRESSURE</p>
+      </div>
+      <div class="game-footer">
+        <span class="footer-brand">BC<span>®</span></span>
+        <span class="score-display">SCORE <b id="score">0</b><span class="score-total"> / 3</span></span>
+        <span class="footer-tag">KEEP IT REAL.</span>
+      </div>
+    </section>
+
+    <aside class="side-note" aria-label="Game instructions">
+      <span class="side-number">01—03</span>
+      <p>WORDPLAY<br>MEETS<br><span>RHYTHM.</span></p>
+      <span class="side-rule"></span>
+      <span class="side-caption">A LITTLE TEST<br>FOR THE CULTURE.</span>
+    </aside>
+  </main>
+  <footer class="mobile-foot">MADE FOR THE LOVE OF THE BAR.</footer>
+</body>
+</html>
