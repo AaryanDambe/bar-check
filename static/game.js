@@ -73,6 +73,7 @@
   const musicVolume = document.querySelector("#music-volume");
   const musicPlayerHost = document.querySelector("#music-player-host");
   const musicStatus = document.querySelector("#music-status");
+  const victoryScreen = document.querySelector("#victory-screen");
   const YOUTUBE_VIDEO_ID = "jzkYSITK_H4";
   const GAME_MUSIC_LEVEL = 0.3;
   const BEAT_MUSIC_LEVEL = 0.04;
@@ -83,6 +84,7 @@
 
   let roundIndex = -1;
   let score = 0;
+  let victoryShown = false;
   let remaining = ROUND_SECONDS;
   let timerId = null;
   let sequenceTimeouts = [];
@@ -140,6 +142,9 @@
 
   function startGame() {
     clearScheduledWork();
+    victoryShown = false;
+    victoryScreen.hidden = true;
+    document.body.classList.remove("victory-mode");
     previousGameQuestionIds = { ...activeQuestionIds };
     activeQuestionIds = {};
     roundIndex = 0;
@@ -335,6 +340,10 @@
     feedback.classList.add(passed ? "pass" : "fail");
     musicDucked = false;
     syncMusicPlayback();
+    if (passed && score === rounds.length && roundIndex === rounds.length - 1) {
+      showVictory();
+      return;
+    }
     const nextButton = content.querySelector('[data-action="continue"]');
     nextButton.classList.remove("hidden");
     nextButton.focus();
@@ -365,6 +374,52 @@
       <button class="action-button" data-action="replay" type="button">RUN IT BACK <span aria-hidden="true">↻</span></button>
       <p class="micro-copy">NEW QUESTIONS. SAME GOOD ENERGY.</p>`;
     content.querySelector('[data-action="replay"]').focus();
+  }
+
+  function showVictory() {
+    if (victoryShown || score !== rounds.length || roundIndex !== rounds.length - 1) return;
+    victoryShown = true;
+    clearScheduledWork();
+    roundLocked = true;
+    previousGameQuestionIds = { ...activeQuestionIds };
+    counter.textContent = `${rounds.length} / ${rounds.length}`;
+    progress.style.width = "100%";
+    scoreElement.textContent = String(score);
+    document.body.classList.add("victory-mode");
+    victoryScreen.hidden = false;
+    victoryScreen.focus();
+  }
+
+  function returnToCypher() {
+    clearScheduledWork();
+    victoryShown = false;
+    victoryScreen.hidden = true;
+    document.body.classList.remove("victory-mode");
+    roundLocked = true;
+    beatPhase = "idle";
+    roundIndex = -1;
+    score = 0;
+    remaining = ROUND_SECONDS;
+    activeQuestion = null;
+    musicDucked = false;
+    syncMusicPlayback();
+    counter.textContent = "— / 3";
+    progress.style.width = "0%";
+    scoreElement.textContent = "0";
+    content.innerHTML = `<div class="boombox" aria-hidden="true"><span></span><i></i><i></i><b>BC</b></div>
+      <p class="game-kicker">THREE ROUNDS. ONE MIC.</p>
+      <h2>Can you<br><span>catch the vibe?</span></h2>
+      <p class="welcome-copy">Find a rhyme. Remember a beat. Spot the bar that breaks the pattern. No rush—just bring your ears.</p>
+      <button class="action-button" id="start-button" type="button">ENTER THE CYPHER <span aria-hidden="true">↗</span></button>
+      <p class="micro-copy">THIS IS A GAME, NOT REAL SECURITY.</p>`;
+    content.querySelector("#start-button").focus();
+  }
+
+  function onVictoryClick(event) {
+    const button = event.target.closest("[data-victory-action]");
+    if (!button || !victoryScreen.contains(button)) return;
+    if (button.dataset.victoryAction === "replay") startGame();
+    else if (button.dataset.victoryAction === "back") returnToCypher();
   }
 
   function loadYouTubeApi() {
@@ -530,6 +585,7 @@
   }
 
   content.addEventListener("click", onContentClick);
+  victoryScreen.addEventListener("click", onVictoryClick);
   musicToggle.addEventListener("click", () => {
     musicEnabled = !musicEnabled;
     updateMusicToggle();
