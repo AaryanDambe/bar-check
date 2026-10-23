@@ -3,57 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11110f">
-  <meta name="description" content="BAR CHECK: three quick rhythm-and-word mini-games. A game, not real security.">
-  <title>BAR CHECK — Prove Your Flow</title>
+  <meta name="theme-color" content="#171613">
+  <meta name="description" content="BAR CHECK — Bots follow patterns. Can you catch the vibe? A desi hip-hop CAPTCHA experiment.">
+  <title>BAR CHECK — Catch the Vibe</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='game.js') }}" defer></script>
 </head>
 <body>
-  <div class="page-grain" aria-hidden="true"></div>
+  <div class="paper-grain" aria-hidden="true"></div>
   <header class="topbar">
-    <a class="wordmark" href="/" aria-label="Bar Check home"><span class="mark-icon">B</span><span>BAR<span class="lime-text">CHECK</span></span></a>
-    <span class="top-note">THE BOOTH IS OPEN <span class="live-dot"></span></span>
+    <a class="wordmark" href="/" aria-label="Bar Check home"><span class="mark-icon">BC</span><span>BAR<span>CHECK</span></span></a>
+    <div class="top-actions">
+      <div class="music-controls" aria-label="Optional background music controls">
+        <span class="music-track">BUSS DOWN <span>· KR$NA X RAFTAAR</span></span>
+        <label class="volume-control" for="music-volume"><span>VOL</span><input id="music-volume" type="range" min="0" max="100" value="45" aria-label="Background music volume"></label>
+        <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Turn background music on">MUSIC OFF</button>
+      </div>
+    </div>
+    <div class="music-player-host" id="music-player-host" hidden aria-label="Buss Down YouTube player"><div id="youtube-player"></div></div>
+    <p class="music-status" id="music-status" aria-live="polite"></p>
   </header>
 
-  <main class="layout">
-    <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow"><span class="eyebrow-line"></span> HUMAN? SHOW US YOUR FLOW</p>
-      <h1 id="page-title">BAR<br><span class="title-outline">CHECK</span><span class="title-period">.</span></h1>
-      <p class="intro-copy">Three quick rounds. One mic. <span>Don’t let the bot steal your spot.</span></p>
-      <div class="stamp" aria-hidden="true"><span>NO</span><span>BOTS</span><span>ALLOWED</span></div>
-      <div class="caution"><span class="caution-icon">!</span><span>This is a game, <strong>not real security.</strong></span></div>
+  <main class="poster-layout">
+    <section class="poster" aria-labelledby="page-title">
+      <div class="poster-topline">
+        <span class="issue-label">BC—001 <i>●</i> MUMBAI / भारत</span>
+        <span class="adhesive-label">LIVE FROM THE UNDERGROUND</span>
+      </div>
+      <div class="poster-copy">
+        <p class="hindi-line" lang="hi">अपनी आवाज़ पहचानो <span>— MIC CHECK</span></p>
+        <h1 id="page-title">BAR<br><span>CHECK</span><b>!</b></h1>
+        <p class="tagline">Bots follow patterns.<br><span>Can you catch the vibe?</span></p>
+        <div class="poster-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="round-stamps" aria-label="Three rounds">
+        <span><b>01</b> FIND THE RHYME</span>
+        <span><b>02</b> BEAT THE BOT</span>
+        <span><b>03</b> ODD BAR OUT</span>
+      </div>
+      <div class="poster-bottom">
+        <span class="experiment-label">A DESI HIP-HOP<br>CAPTCHA EXPERIMENT</span>
+        <span class="cassette" aria-hidden="true"><i></i><i></i><b>BC—001</b></span>
+        <span class="poster-edition">ONE MIC<br>NO SHORTCUTS</span>
+      </div>
+      <span class="sticker" aria-hidden="true">NO<br>BOTS<br>ज़रा भी नहीं</span>
+      <span class="arrow-doodle" aria-hidden="true">↘</span>
     </section>
 
     <section class="game-shell" aria-label="Bar Check mini-games">
       <div class="game-topline">
-        <span class="section-label"><span class="spark">✳</span> LIVE VERIFICATION</span>
+        <span class="section-label"><span class="spark">✳</span> THE CYPHER</span>
         <span class="round-counter" id="round-counter">ROUND <b>— / 3</b></span>
       </div>
       <div class="progress-track" aria-label="Game progress"><span id="progress-fill"></span></div>
-
       <div class="game-content" id="game-content" aria-live="polite">
-        <div class="welcome-mark" aria-hidden="true"><span>✳</span></div>
-        <p class="game-kicker">STEP UP TO THE MIC</p>
-        <h2>Can you pass<br>the <span>BAR CHECK?</span></h2>
-        <p class="welcome-copy">Catch a rhyme, replay a beat, and spot the odd bar. You’ve got 20 seconds per round.</p>
-        <button class="action-button" id="start-button" type="button">START THE CHECK <span aria-hidden="true">↗</span></button>
-        <p class="micro-copy">3 ROUNDS <i>·</i> 20 SECONDS EACH <i>·</i> ZERO PRESSURE</p>
+        <div class="boombox" aria-hidden="true"><span></span><i></i><i></i><b>BC</b></div>
+        <p class="game-kicker">THREE ROUNDS. ONE MIC.</p>
+        <h2>Can you<br><span>catch the vibe?</span></h2>
+        <p class="welcome-copy">Find a rhyme. Remember a beat. Spot the bar that breaks the pattern. No rush—just bring your ears.</p>
+        <button class="action-button" id="start-button" type="button">ENTER THE CYPHER <span aria-hidden="true">↗</span></button>
+        <p class="micro-copy">THIS IS A GAME, NOT REAL SECURITY.</p>
       </div>
       <div class="game-footer">
-        <span class="footer-brand">BC<span>®</span></span>
+        <span class="footer-brand">BC<span>—001</span></span>
         <span class="score-display">SCORE <b id="score">0</b><span class="score-total"> / 3</span></span>
-        <span class="footer-tag">KEEP IT REAL.</span>
+        <span class="footer-tag">अपना FLOW रखो.</span>
       </div>
     </section>
-
-    <aside class="side-note" aria-label="Game instructions">
-      <span class="side-number">01—03</span>
-      <p>WORDPLAY<br>MEETS<br><span>RHYTHM.</span></p>
-      <span class="side-rule"></span>
-      <span class="side-caption">A LITTLE TEST<br>FOR THE CULTURE.</span>
-    </aside>
   </main>
-  <footer class="mobile-foot">MADE FOR THE LOVE OF THE BAR.</footer>
+  <footer class="site-foot">
+    <span>INDEPENDENT SOUND. ORIGINAL WORDPLAY.</span>
+    <span>मुंबई से, दिल से <b>✳</b></span>
+  </footer>
 </body>
 </html>
